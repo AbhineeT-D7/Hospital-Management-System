@@ -18,7 +18,7 @@ import java.util.List;
 @ToString
 public class PatientDto implements Serializable {
 	private Long patientId;
-	private String name;
+	private String firstName;
 	private String lastName;
 	private String phoneNo;
 	private Date DateOfBirth;

@@ -12,7 +12,7 @@ A RESTful backend API for managing hospital operations including patients, staff
 | Spring Boot | Backend framework |
 | Spring Security + JWT | Authentication & Authorization |
 | Maven | Build & dependency management |
-| MySQL | Relational database |
+| PostgreSQL | Relational database |
 | JPA / Hibernate | ORM for database interaction |
 
 ---
@@ -56,7 +56,7 @@ src/
 ### Prerequisites
 - Java 17+
 - Maven 3.6+
-- MySQL 8+
+- PostgreSQL 13+
 
 ### Steps
 
@@ -70,16 +70,24 @@ src/
 
    Open `src/main/resources/application.properties` and update:
    ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/hospital_db
-   spring.datasource.username=your_mysql_username
-   spring.datasource.password=your_mysql_password
+   server.port=8080
+   spring.datasource.url=jdbc:postgresql://localhost:5432/Hospital
+   spring.datasource.username=your_postgres_username
+   spring.datasource.password=your_postgres_password
+   spring.jpa.hibernate.ddl-auto=update
+   spring.jpa.show-sql=true
+   spring.jpa.properties.hibernate.format_sql=true
    ```
 
 3. **Set up the database**
 
-   Run the SQL script provided:
+   Create a database named `Hospital` in PostgreSQL:
+   ```sql
+   CREATE DATABASE Hospital;
+   ```
+   Then run the SQL script:
    ```bash
-   mysql -u root -p < sql.txt
+   psql -U postgres -d Hospital -f sql.txt
    ```
 
 4. **Run the application**
