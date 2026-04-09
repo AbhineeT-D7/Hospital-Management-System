@@ -1,0 +1,12 @@
+package com.abhi.gov_hos_app.repository;
+
+import java.util.List;
+
+import com.abhi.gov_hos_app.entity.Receipt;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ReceiptRepository extends JpaRepository<Receipt, Long> {
+
+	List<Receipt> findByProblemProblemIdAndStatusOrderByReceiptIdAsc(Long problemId, int status);
+
+}

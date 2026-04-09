@@ -1,0 +1,24 @@
+package com.abhi.gov_hos_app.entity.enums;
+
+public enum City {
+	AGRA,
+	VARANASI,
+	PRAYAGRAJ,
+	MEERUT,
+	NOIDA,
+	GURGAON,
+	SURAT,
+	VADODARA,
+	RAJKOT,
+	COIMBATORE,
+	MADURAI,
+	VISAKHAPATNAM,
+	KOCHI,
+	TRIVANDRUM,
+	GUWAHATI,
+	RANCHI,
+	RAIPUR,
+	DEHRADUN,
+	SHIMLA,
+	JAMMU
+}
