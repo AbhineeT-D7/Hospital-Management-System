@@ -38,15 +38,20 @@ public class Patient {
 	private List<Problem> problems;
 
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference("patient-admissions")
 	private List<Admission> admissions;
 
-
-	public Patient(String fName, String lName, String gender, City city, String mail, int id) {
-		this.name = fName;
-		this.lastname = lName;
+	public Patient(Long patientId, String firstName, String lastName,
+				   String phoneNo, Date DoB, String gender, City city,
+				   String email, int status) {
+		this.patientId = patientId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNo = phoneNo;
+		this.DoB = DoB;
 		this.gender = gender;
-		this.city =  city;
-		this.email = mail;
-		this.status = id;
+		this.city = city;
+		this.email = email;
+		this.status = status;
 	}
 }
