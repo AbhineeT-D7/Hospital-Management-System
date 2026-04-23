@@ -3,8 +3,6 @@ package com.abhi.gov_hos_app.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.abhi.gov_hos_app.entity.Patient;
-import com.abhi.gov_hos_app.entity.Problem;
 import com.abhi.gov_hos_app.entity.enums.ProblemStatus;
 
 import lombok.AllArgsConstructor;

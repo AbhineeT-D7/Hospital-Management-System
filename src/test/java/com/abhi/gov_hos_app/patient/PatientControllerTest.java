@@ -1,88 +1,101 @@
 package com.abhi.gov_hos_app.patient;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import org.assertj.core.util.Arrays;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.abhi.gov_hos_app.controller.PatientController;
-import com.abhi.gov_hos_app.dto.PatientDto;
 import com.abhi.gov_hos_app.entity.Patient;
 import com.abhi.gov_hos_app.entity.enums.City;
 import com.abhi.gov_hos_app.service.PatientService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
-//@SpringBootTest
-//@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PatientControllerTest {
-	@InjectMocks
-	PatientController patientController;
+
+	@LocalServerPort
+	private int port;
+
+	@Autowired
+	private WebTestClient webTestClient;
 
 	@Autowired
 	private PatientService patientService;
 
-	private RestTemplate restTemplate;
-
-	private ResponseEntity<Patient> response;
-
-	@Test
-	public void testGetAllPatientWithStatusOne() throws URISyntaxException {
-		restTemplate = new RestTemplate();
-		String baseUrl = "http://localhost:8185/patient";
-		URI uri = new URI(baseUrl);
-		ResponseEntity<Object> result = restTemplate.getForEntity(baseUrl, Object.class);
-		// List<PatientDto>
-		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+	private String getBaseUrl() {
+		return "http://localhost:" + port + "/patient";
 	}
 
 	@Test
-	public void savePatientV1() {
-		try {
-			Patient p1 = new Patient("zipato", "zazula", "Male", City.PRAYAGRAJ, "zipato@gmail.com", 1);
-			String addURI = "http://localhost:8185/patient";
-			
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Accept", "application/json");
-			headers.add("Content-Type", "application/json"); 
-			HttpEntity<Patient> entity = new HttpEntity<Patient>(p1, headers); 
-			
-			response = this.restTemplate.postForEntity(addURI, p1, Patient.class);
-			// responseBody = response.getBody().toString();
-			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testGetAllPatients() {
+		webTestClient.get()
+				.uri("http://localhost:" + port + "/patient")
+				.exchange()
+				.expectStatus().isOk();
+	}
+	@Test
+	public void savePatientV1() throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dob = sdf.parse("1998-01-01");
+
+		Patient p1 = new Patient(
+				1234567890L, "zipato", "zazula",
+				"1234567890", dob, "Male",
+				City.PRAYAGRAJ, "zipato@gmail.com", 1
+		);
+
+		webTestClient.post()
+				.uri(getBaseUrl())
+				.contentType(MediaType.APPLICATION_JSON)
+				.bodyValue(p1)
+				.exchange()
+				.expectStatus().isOk()
+				.expectBody(Patient.class)
+				.consumeWith(response -> {
+					Patient saved = response.getResponseBody();
+					assertThat(saved).isNotNull();
+					assertThat(saved.getPatientId()).isNotNull();
+					assertThat(saved.getFirstName()).isEqualTo("zipato");
+				});
 	}
 
 	@Test
-	void savePatientV2() {
-		Patient p1 = new Patient("kamara", "tamara", "Female", City.RAJKOT, "kamara.tamara@mynet.com", 1);
+	public void savePatientV2() throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dob = sdf.parse("1998-1-1");
+
+		Patient p1 = new Patient(
+				1234567891L, "kamara", "tamara",
+				"9875461230", dob, "Female",
+				City.RAJKOT, "kamara.tamara@mynet.com", 1
+		);
+
+		webTestClient.post()
+				.uri(getBaseUrl())
+				.contentType(MediaType.APPLICATION_JSON)
+				.bodyValue(p1)
+				.exchange()
+				.expectStatus().isOk()
+				.expectBody(Patient.class)
+				.consumeWith(response -> {
+					Patient saved = response.getResponseBody();
+					assertThat(saved).isNotNull();
+					assertThat(saved.getPatientId()).isNotNull();
+					assertThat(saved.getFirstName()).isEqualTo("kamara");
+				});
+
 		Patient p2 = patientService.save(p1);
 		assertThat(p2.getPatientId()).isNotNull();
 	}
 
-}
+
+	}

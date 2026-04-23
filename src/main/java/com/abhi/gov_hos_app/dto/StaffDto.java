@@ -1,5 +1,6 @@
 package com.abhi.gov_hos_app.dto;
 
+
 import com.abhi.gov_hos_app.entity.enums.City;
 import com.abhi.gov_hos_app.entity.enums.Department;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class StaffDto implements Serializable {
+public class StaffDto implements Serializable{
 	
 	private Long staffId;
 	private String staffName;

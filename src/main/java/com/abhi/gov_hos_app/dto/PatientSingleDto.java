@@ -16,10 +16,10 @@ import lombok.ToString;
 @ToString
 public class PatientSingleDto implements Serializable {
 	private Long patientId;
-	private String name;
+	private String firstName;
 	private String lastName;
 	private String phoneNo;
-	private Date DateOfBirth;
+	private Date DoB;
 	private String gender;
 	private City city;
 	private String email;
