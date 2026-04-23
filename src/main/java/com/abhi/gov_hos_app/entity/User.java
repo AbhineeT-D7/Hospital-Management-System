@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Transient;
 
 @Data
 @Entity
-@Table(name="user")
+@Table(name="app_user")
 public class User {
 
     @Id

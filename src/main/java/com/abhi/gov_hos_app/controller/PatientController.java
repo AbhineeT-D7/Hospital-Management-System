@@ -55,9 +55,9 @@ public class PatientController {
 	}
 
 	@GetMapping("/find-by-name/{name}")
-	public ResponseEntity<List<Patient>> getPatientByName(@PathVariable(name = "name", required = true) String name)
+	public ResponseEntity<List<Patient>> getPatientByFirstName(@PathVariable(name = "firstName", required = true) String firstName)
 			throws Exception {
-		return ResponseEntity.ok(patientService.findByName(name));
+		return ResponseEntity.ok(patientService.findByFirstName(firstName));
 	}
 
 	@PostMapping

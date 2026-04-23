@@ -122,13 +122,13 @@ public class PatientService {
 		}
 	}
 
-	public List<Patient> findByName(String name) throws Exception { 
-		List<Patient> patients = patientRepository.findAllByOrderByNameAsc();
+	public List<Patient> findByFirstName(String firstName) throws Exception {
+		List<Patient> patients = patientRepository.findAllByOrderByFirstNameAsc();
 		if (!patients.isEmpty()) {
 			return patients;
 		} else { 
-			logger.error("--Patient does not exist with this name " + name);
-			throw new PatientNotFoundException("Patient does not exist with this name " + name);
+			logger.error("--Patient does not exist with this name " + firstName);
+			throw new PatientNotFoundException("Patient does not exist with this name " + firstName);
 		}
 	}
 

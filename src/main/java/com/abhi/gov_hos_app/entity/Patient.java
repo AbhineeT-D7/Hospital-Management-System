@@ -1,6 +1,7 @@
 package com.abhi.gov_hos_app.entity;
 
 import com.abhi.gov_hos_app.entity.enums.City;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "patient")
@@ -20,10 +20,10 @@ public class Patient {
 	@Column(name = "patient_id")
 	private Long patientId;
 
-	private String name;
-	private String lastname;
+	private String firstName;
+	private String lastName;
 	private String phoneNo;
-	private Date bornDate;
+	private Date DoB;
 	private String gender;
 
 	@Enumerated(EnumType.ORDINAL)
@@ -35,6 +35,7 @@ public class Patient {
 	private int status;
 
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference("patient-problems")
 	private List<Problem> problems;
 
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
