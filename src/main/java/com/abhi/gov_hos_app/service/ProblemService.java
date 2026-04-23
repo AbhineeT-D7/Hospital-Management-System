@@ -86,12 +86,10 @@ public class ProblemService {
 				.orElseThrow(() ->
 						new NotFoundException("Problem not found with id " + problemId));
 
-		// Update fields (do NOT overwrite patient blindly)
 		existing.setProblemName(dto.getProblemName());
 		existing.setProblemDetail(dto.getProblemDetail());
 		existing.setProblemStatus(dto.getProblemStatus());
 
-		// Optional: update patient if needed
 		if (dto.getPId() != null) {
 			Patient patient = patientRepository.findById(dto.getPId())
 					.orElseThrow(() ->

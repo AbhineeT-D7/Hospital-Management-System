@@ -15,10 +15,6 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-<!--		<java.version>23</java.version>-->
-<!--		<projectlombok.version>1.18.32</projectlombok.version>-->
-<!--	</properties>-->
-
 		<java.version>21</java.version>
 		<maven.compiler.release>21</maven.compiler.release>
 	</properties>
