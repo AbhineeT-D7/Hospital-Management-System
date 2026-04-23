@@ -1,18 +1,18 @@
-CREATE TABLE AAPATIENT 
-   (	
-    patientid NUMBER(19,0) NOT NULL ENABLE, 
-	name VARCHAR2(255 CHAR), 
-	lastname VARCHAR2(255 CHAR), 
+CREATE TABLE AAPATIENT
+   (
+    patientId NUMBER(19,0) NOT NULL ENABLE,
+	firstName VARCHAR2(255 CHAR),
+	lastName VARCHAR2(255 CHAR),
 	age VARCHAR2(255 CHAR),
 	gender VARCHAR2(255 CHAR),
 	city VARCHAR2(255 CHAR),
 	status NUMBER(1,0)
-	 PRIMARY KEY (patientid)
+	 PRIMARY KEY (patientId)
     );
-   
-    
+
+
    CREATE SEQUENCE AA_PATIENT_SEQ START WITH 1 INCREMENT BY 1
-   INSERT INTO AAPATIENT  VALUES (1,'Can','Yücel','51','Male','Zonguldak')
+   INSERT INTO AAPATIENT  VALUES (1,'Can','Yucel','51','Male','Zonguldak')
    INSERT INTO AAPATIENT  VALUES (2,'Harun ','tunay','5','Male','Ankara')
    INSERT INTO AAPATIENT  VALUES (3,'Firidevs','tunay','6','Female','Kayseri')
    INSERT INTO AAPATIENT  VALUES (4,'Yücel','Firidevs','31','Male','Sakarya')
@@ -43,6 +43,6 @@ CREATE TABLE AAPATIENT
    INSERT INTO AAPATIENT  VALUES (151,'Mehmet Serdar','Erbiloglu','17','Male','Karaman')
 
    SELECT *  FROM AAPATIENT ORDER BY PATIENTID
-   DELETE FROM AAPATIENT WHERE patientid = 0
-   
+   DELETE FROM AAPATIENT WHERE patientId = 0
+
    DROP TABLE AAPATIENT
