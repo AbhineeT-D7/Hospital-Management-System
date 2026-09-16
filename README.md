@@ -1,109 +1,180 @@
-# 🏥 Hospital Management System
+# 🏥 Hospital Management System (Microservices)
 
-A RESTful backend API for managing hospital operations including patients, staff, problems, and receipts. Built with **Spring Boot** and secured with **JWT Authentication**.
-
----
-
-## 🛠️ Technologies Used
-
-| Technology | Purpose |
-|------------|---------|
-| Java | Core programming language |
-| Spring Boot | Backend framework |
-| Spring Security + JWT | Authentication & Authorization |
-| Maven | Build & dependency management |
-| PostgreSQL | Relational database |
-| JPA / Hibernate | ORM for database interaction |
+A highly scalable, distributed RESTful backend system for managing hospital operations including patients, staff, and billing receipts. Built with **Java 21**, **Spring Boot 3.2**, and **Spring Cloud**, and secured with **JWT Authentication**.
 
 ---
 
-## 📁 Project Structure
+## 📸 Demo
 
+> **Demo Placeholder:** *(Replace this image with a GIF of Postman requests, Swagger UI, or application logs to visually demonstrate the API in action!)*
+
+![Demo Image](https://via.placeholder.com/800x400.png?text=Your+API+Demo+Screenshot+Goes+Here)
+
+---
+
+## 🏗️ Architecture
+
+This project is built using a **Microservices Architecture**. The monolithic domain has been broken down into independent services communicating through an API Gateway, utilizing a **database-per-service** pattern for true decoupling.
+
+```mermaid
+graph TD
+    Client([Client / Frontend]) -->|HTTP Requests| API_Gateway
+
+    subgraph Service Discovery
+        Eureka[Netflix Eureka]
+    end
+
+    subgraph Infrastructure Layer
+        API_Gateway[Spring Cloud Gateway]
+    end
+
+    subgraph Core Microservices
+        AuthService[Auth Service]
+        StaffService[Staff Service]
+        PatientService[Patient Service]
+        ReceiptService[Receipt Service]
+    end
+
+    subgraph PostgreSQL Databases
+        DB_Auth[(hos_auth)]
+        DB_Staff[(hos_staff)]
+        DB_Patient[(hos_patient)]
+        DB_Receipt[(hos_receipt)]
+    end
+
+    API_Gateway -->|Routes to| AuthService
+    API_Gateway -->|Routes to| StaffService
+    API_Gateway -->|Routes to| PatientService
+    API_Gateway -->|Routes to| ReceiptService
+
+    AuthService --> DB_Auth
+    StaffService --> DB_Staff
+    PatientService --> DB_Patient
+    ReceiptService --> DB_Receipt
+
+    API_Gateway -.->|Registers/Discovers| Eureka
+    AuthService -.->|Registers| Eureka
+    StaffService -.->|Registers| Eureka
+    PatientService -.->|Registers| Eureka
+    ReceiptService -.->|Registers| Eureka
 ```
-src/
-├── main/
-│   ├── java/com/abhi/gov_hos_app/
-│   │   ├── controller/        # REST Controllers (Patient, Staff, Problem, Receipt)
-│   │   ├── dto/               # Data Transfer Objects
-│   │   ├── entity/            # JPA Entities (Patient, Staff, Problem, Receipt, etc.)
-│   │   │   └── enums/         # Enums (City, Department, Role, ProblemStatus)
-│   │   ├── exception/         # Custom Exception Handling
-│   │   ├── repository/        # Spring Data JPA Repositories
-│   │   ├── security/          # JWT Filter, Token Provider, Security Config
-│   │   ├── service/           # Business Logic Layer
-│   │   └── util/              # API Path Constants
-│   └── resources/
-│       └── application.properties
-└── test/                      # Unit Tests
-```
+
+### Microservices:
+- 🌐 **API Gateway (`api-gateway`)**: The single entry point for all client requests. Handles dynamic routing and load balancing.
+- 🔍 **Discovery Server (`discovery-server`)**: Uses Netflix Eureka for automated service registration and health monitoring.
+- 🔐 **Auth Service (`auth-service`)**: Handles user authentication, authorization, and JWT token generation.
+- 👨‍⚕️ **Staff Service (`staff-service`)**: Manages hospital staff details and departments.
+- 👤 **Patient Service (`patient-service`)**: Manages patient records and medical problems.
+- 🧾 **Receipt Service (`receipt-service`)**: Generates and manages billing receipts.
+- 📦 **Common Library (`common-lib`)**: A shared Maven module containing reusable DTOs, custom exception handling, and security filters to maintain DRY principles.
+
+---
+
+## 🛠️ Technologies & Tools
+
+| Category | Technology |
+|----------|------------|
+| **Core** | Java 21, Spring Boot 3.2.5 |
+| **Cloud & Routing** | Spring Cloud (2023.0.1), Netflix Eureka, Spring Cloud Gateway |
+| **Security** | Spring Security, JWT (JSON Web Tokens) |
+| **Database & ORM** | PostgreSQL, Spring Data JPA, Hibernate |
+| **DevOps** | Docker, Docker Compose |
+| **Build & Utilities** | Maven, Lombok |
 
 ---
 
 ## 🚀 Features
 
-- ✅ **Patient Management** — Add, update, view, and manage patients
-- ✅ **Staff Management** — Manage hospital staff with roles and departments
-- ✅ **Problem Tracking** — Track patient problems with status updates
-- ✅ **Receipt Management** — Generate and manage billing receipts
-- ✅ **JWT Security** — Secure endpoints with token-based authentication
-- ✅ **Role-Based Access** — Different access levels based on user roles
-- ✅ **Exception Handling** — Global exception handler with custom responses
+- ✅ **Microservices Infrastructure** — Fully distributed system with Service Discovery and an API Gateway.
+- ✅ **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) managed via Docker Compose.
+- ✅ **JWT Security** — Stateless, secure endpoints with token-based authentication.
+- ✅ **Role-Based Access Control (RBAC)** — Different access levels based on user roles.
+- ✅ **Centralized Exception Handling** — Global exception handlers providing standardized API error responses across all services.
 
 ---
 
 ## ⚙️ Setup & Installation
 
 ### Prerequisites
-- Java 17+
-- Maven 3.6+
-- PostgreSQL 13+
+- Java 21+
+- Maven 3.8+
+- Docker & Docker Compose
 
-### Steps
+### 1. Clone the repository
+```bash
+git clone https://github.com/AbhineeT-D7/Hospital-Management-System.git
+cd Hospital-Management-System
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/AbhineeT-D7/Hospital-Management-System.git
-   cd Hospital-Management-System
-   ```
+### 2. Start the Databases
+The project uses Docker Compose to easily spin up the 4 separate PostgreSQL databases required by the microservices.
+```bash
+docker-compose up -d
+```
+*Note: This will start `postgres-auth` (5442), `postgres-patient` (5433), `postgres-staff` (5434), and `postgres-receipt` (5435).*
 
-2. **Configure the database**
+### 3. Build the Project
+Compile the project and install the `common-lib` to your local Maven repository so other services can use it.
+```bash
+mvn clean install -DskipTests
+```
 
-   Open `src/main/resources/application.properties` and update:
-   ```properties
-   server.port=8080
-   spring.datasource.url=jdbc:postgresql://localhost:5432/Hospital
-   spring.datasource.username=your_postgres_username
-   spring.datasource.password=your_postgres_password
-   spring.jpa.hibernate.ddl-auto=update
-   spring.jpa.show-sql=true
-   spring.jpa.properties.hibernate.format_sql=true
-   ```
+### 4. Run the Microservices
+You must start the services in the following order. You can run them using your IDE or via the command line (`mvn spring-boot:run` in each directory):
 
-3. **Set up the database**
+1. **Discovery Server** (`discovery-server`) - Runs on port `8761`
+2. **API Gateway** (`api-gateway`) - Runs on port `8080`
+3. **Auth Service** (`auth-service`) - Runs on random/assigned port
+4. **Staff Service** (`staff-service`) - Runs on random/assigned port
+5. **Patient Service** (`patient-service`) - Runs on random/assigned port
+6. **Receipt Service** (`receipt-service`) - Runs on random/assigned port
 
-   Create a database named `Hospital` in PostgreSQL:
-   ```sql
-   CREATE DATABASE Hospital;
-   ```
-   Then run the SQL script:
-   ```bash
-   psql -U postgres -d Hospital -f sql.txt
-   ```
+---
 
-4. **Run the application**
-   ```bash
-   mvn spring-boot:run
-   ```
+## 📌 API Endpoints
 
-   The server will start at: `http://localhost:8080`
+### 🔐 Authentication (`auth-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/user/login` | Authenticate and retrieve JWT token |
+| POST | `/api/user/register` | Register a new user |
+
+### 👤 Patient (`patient-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/patients` | Retrieve all patients |
+| GET | `/api/patients/{id}` | Retrieve a specific patient by ID |
+| POST | `/api/patients` | Add a new patient |
+| PUT | `/api/patients/{id}` | Update patient details |
+| DELETE | `/api/patients/{id}` | Delete a patient |
+
+### 👨‍⚕️ Staff (`staff-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/staff` | Retrieve all staff members |
+| POST | `/api/staff` | Add a new staff member |
+| PUT | `/api/staff/{id}` | Update staff details |
+| DELETE | `/api/staff/{id}` | Delete a staff member |
+
+### 🩺 Problem (`patient-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/problems` | Retrieve all medical problems |
+| POST | `/api/problems` | Log a new medical problem |
+| PUT | `/api/problems/{id}` | Update problem status |
+
+### 🧾 Receipt (`receipt-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/receipts` | Retrieve all billing receipts |
+| POST | `/api/receipts` | Generate a new billing receipt |
 
 ---
 
 ## 🔐 Authentication
 
 This API uses **JWT (JSON Web Token)** for authentication.
-
-1. Login with your credentials to receive a token
+1. Authenticate via the `auth-service` through the API Gateway to receive a token.
 2. Include the token in the `Authorization` header for protected routes:
    ```
    Authorization: Bearer <your_token>
@@ -111,42 +182,9 @@ This API uses **JWT (JSON Web Token)** for authentication.
 
 ---
 
-## 📌 API Endpoints
+## 🧪 Testing
 
-### 👤 Patient
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/patients` | Get all patients |
-| GET | `/api/patients/{id}` | Get patient by ID |
-| POST | `/api/patients` | Add a new patient |
-| PUT | `/api/patients/{id}` | Update patient |
-| DELETE | `/api/patients/{id}` | Delete patient |
-
-### 👨‍⚕️ Staff
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/staff` | Get all staff |
-| POST | `/api/staff` | Add new staff |
-| PUT | `/api/staff/{id}` | Update staff |
-| DELETE | `/api/staff/{id}` | Delete staff |
-
-### 🩺 Problem
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/problems` | Get all problems |
-| POST | `/api/problems` | Add a problem |
-| PUT | `/api/problems/{id}` | Update problem status |
-
-### 🧾 Receipt
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/receipts` | Get all receipts |
-| POST | `/api/receipts` | Generate receipt |
-
----
-
-## 🧪 Running Tests
-
+To run unit tests across all microservices (uses H2 in-memory database):
 ```bash
 mvn test
 ```
@@ -161,5 +199,4 @@ mvn test
 ---
 
 ## 📄 License
-
 This project is open source and available under the [MIT License](LICENSE).
