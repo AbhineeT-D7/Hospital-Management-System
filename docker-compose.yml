@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Databases
+  postgres-auth:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: hos_auth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "Admin@0000"
+    ports:
+      - "5442:5432"
+    restart: unless-stopped
+
+  postgres-patient:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: hos_patient
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "Admin@0000"
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+
+  postgres-staff:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: hos_staff
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "Admin@0000"
+    ports:
+      - "5434:5432"
+    restart: unless-stopped
+
+  postgres-receipt:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: hos_receipt
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "Admin@0000"
+    ports:
+      - "5435:5432"
+    restart: unless-stopped

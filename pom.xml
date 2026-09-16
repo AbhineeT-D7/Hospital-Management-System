@@ -9,10 +9,17 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.abhi.gov_hos_app</groupId>
+<<<<<<< HEAD
 	<artifactId>MedSecure</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>MedSecure</name>
+=======
+	<artifactId>hospital-system-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>hospital-system-parent</name>
+>>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 	<description>Parent POM for Hospital Management Microservices</description>
 
 	<modules>
@@ -52,7 +59,26 @@
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
+<<<<<<< HEAD
 		
+=======
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+>>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 	</dependencies>
 
 	<build>

@@ -4,7 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.abhi.gov_hos_app</groupId>
+<<<<<<< HEAD
 		<artifactId>MedSecure</artifactId>
+=======
+		<artifactId>hospital-system-parent</artifactId>
+>>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>receipt-service</artifactId>
