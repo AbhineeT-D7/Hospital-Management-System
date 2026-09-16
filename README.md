@@ -1,14 +1,6 @@
-# 🏥 Hospital Management System (Microservices)
+# 🏥 MedSecure (Hospital Management System)
 
 A highly scalable, distributed RESTful backend system for managing hospital operations including patients, staff, and billing receipts. Built with **Java 21**, **Spring Boot 3.2**, and **Spring Cloud**, and secured with **JWT Authentication**.
-
----
-
-## 📸 Demo
-
-> **Demo Placeholder:** *(Replace this image with a GIF of Postman requests, Swagger UI, or application logs to visually demonstrate the API in action!)*
-
-![Demo Image](https://via.placeholder.com/800x400.png?text=Your+API+Demo+Screenshot+Goes+Here)
 
 ---
 
@@ -78,7 +70,6 @@ graph TD
 | **Cloud & Routing** | Spring Cloud (2023.0.1), Netflix Eureka, Spring Cloud Gateway |
 | **Security** | Spring Security, JWT (JSON Web Tokens) |
 | **Database & ORM** | PostgreSQL, Spring Data JPA, Hibernate |
-| **DevOps** | Docker, Docker Compose |
 | **Build & Utilities** | Maven, Lombok |
 
 ---
@@ -86,7 +77,7 @@ graph TD
 ## 🚀 Features
 
 - ✅ **Microservices Infrastructure** — Fully distributed system with Service Discovery and an API Gateway.
-- ✅ **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) managed via Docker Compose.
+- ✅ **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) running natively on a local PostgreSQL installation to ensure true microservice data decoupling.
 - ✅ **JWT Security** — Stateless, secure endpoints with token-based authentication.
 - ✅ **Role-Based Access Control (RBAC)** — Different access levels based on user roles.
 - ✅ **Centralized Exception Handling** — Global exception handlers providing standardized API error responses across all services.
@@ -98,7 +89,7 @@ graph TD
 ### Prerequisites
 - Java 21+
 - Maven 3.8+
-- Docker & Docker Compose
+- PostgreSQL (running locally on default port 5432)
 
 ### 1. Clone the repository
 ```bash
@@ -106,12 +97,14 @@ git clone https://github.com/AbhineeT-D7/Hospital-Management-System.git
 cd Hospital-Management-System
 ```
 
-### 2. Start the Databases
-The project uses Docker Compose to easily spin up the 4 separate PostgreSQL databases required by the microservices.
-```bash
-docker-compose up -d
-```
-*Note: This will start `postgres-auth` (5442), `postgres-patient` (5433), `postgres-staff` (5434), and `postgres-receipt` (5435).*
+### 2. Setup the Databases
+Open pgAdmin or your preferred database client and create 4 empty databases in your local PostgreSQL server:
+- `hos_auth`
+- `hos_patient`
+- `hos_staff`
+- `hos_receipt`
+
+*(Spring Boot's `ddl-auto=update` will automatically create all tables when the services start up).*
 
 ### 3. Build the Project
 Compile the project and install the `common-lib` to your local Maven repository so other services can use it.
@@ -120,18 +113,18 @@ mvn clean install -DskipTests
 ```
 
 ### 4. Run the Microservices
-You must start the services in the following order. You can run them using your IDE or via the command line (`mvn spring-boot:run` in each directory):
+Start the services in the following order using your IDE or via the command line (`mvn spring-boot:run` in each directory):
 
-1. **Discovery Server** (`discovery-server`) - Runs on port `8761`
-2. **API Gateway** (`api-gateway`) - Runs on port `8080`
-3. **Auth Service** (`auth-service`) - Runs on random/assigned port
-4. **Staff Service** (`staff-service`) - Runs on random/assigned port
-5. **Patient Service** (`patient-service`) - Runs on random/assigned port
-6. **Receipt Service** (`receipt-service`) - Runs on random/assigned port
+1. **Discovery Server** (`discovery-server`) - Runs on port `3802`
+2. **API Gateway** (`api-gateway`) - Runs on port `38021`
+3. **Auth Service** (`auth-service`) - Runs on port `38022`
+4. **Patient Service** (`patient-service`) - Runs on port `38023`
+5. **Receipt Service** (`receipt-service`) - Runs on port `38024`
+6. **Staff Service** (`staff-service`) - Runs on port `38025`
 
 ---
 
-## 📌 API Endpoints
+## 📌 API Endpoints (Access via API Gateway on port 38021)
 
 ### 🔐 Authentication (`auth-service`)
 | Method | Endpoint | Description |
@@ -183,11 +176,7 @@ This API uses **JWT (JSON Web Token)** for authentication.
 ---
 
 ## 🧪 Testing
-
-To run unit tests across all microservices (uses H2 in-memory database):
-```bash
-mvn test
-```
+The API can be tested manually using a REST client like **Postman**. Ensure you start the API Gateway and pass your generated JWT token as a Bearer token to test secure routes.
 
 ---
 
