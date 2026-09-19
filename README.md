@@ -2,7 +2,6 @@
 # MedSecure (Hospital Management System)
 =======
 # Hospital Management System (Microservices)
->>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 
 A highly scalable, distributed RESTful backend system for managing hospital operations including patients, staff, and billing receipts. Built with **Java 21**, **Spring Boot 3.2**, and **Spring Cloud**, and secured with **JWT Authentication**.
 
@@ -78,7 +77,7 @@ graph TD
 
 ---
 
-##  Architecture
+## Architecture
 
 This project is built using a **Microservices Architecture**. The monolithic domain has been broken down into independent services communicating through an API Gateway, utilizing a **database-per-service** pattern for true decoupling.
 
@@ -157,7 +156,6 @@ graph TD
 - **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) running natively on a local PostgreSQL installation to ensure true microservice data decoupling.
 =======
 - **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) managed via Docker Compose.
->>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 - **JWT Security** — Stateless, secure endpoints with token-based authentication.
 - **Role-Based Access Control (RBAC)** — Different access levels based on user roles.
 - **Centralized Exception Handling** — Global exception handlers providing standardized API error responses across all services.
@@ -237,7 +235,6 @@ You must start the services in the following order. You can run them using your 
 
 ## API Endpoints
 
->>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 ### Authentication (`auth-service`)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
