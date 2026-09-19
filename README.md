@@ -259,9 +259,6 @@ This API uses **JWT (JSON Web Token)** for authentication.
 
 ## License
 This project is open source and available under the [MIT License](LICENSE).
-=======
----
 
 ## License
 This project is open source and available under the [MIT License](LICENSE).
->>>>>>> d19da44731868f184d0c8cd15b9e61c4094144c0
