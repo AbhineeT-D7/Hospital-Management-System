@@ -1,7 +1,7 @@
 <<<<<<< HEAD
-# 🏥 MedSecure (Hospital Management System)
+# MedSecure (Hospital Management System)
 =======
-# 🏥 Hospital Management System (Microservices)
+# Hospital Management System (Microservices)
 >>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 
 A highly scalable, distributed RESTful backend system for managing hospital operations including patients, staff, and billing receipts. Built with **Java 21**, **Spring Boot 3.2**, and **Spring Cloud**, and secured with **JWT Authentication**.
@@ -9,7 +9,7 @@ A highly scalable, distributed RESTful backend system for managing hospital oper
 ---
 
 <<<<<<< HEAD
-## 🏗️ Architecture
+## Architecture
 
 This project is built using a **Microservices Architecture**. The monolithic domain has been broken down into independent services communicating through an API Gateway, utilizing a **database-per-service** pattern for true decoupling.
 
@@ -57,20 +57,20 @@ graph TD
 ```
 
 ### Microservices:
-- 🌐 **API Gateway (`api-gateway`)**: The single entry point for all client requests. Handles dynamic routing and load balancing.
-- 🔍 **Discovery Server (`discovery-server`)**: Uses Netflix Eureka for automated service registration and health monitoring.
-- 🔐 **Auth Service (`auth-service`)**: Handles user authentication, authorization, and JWT token generation.
-- 👨‍⚕️ **Staff Service (`staff-service`)**: Manages hospital staff details and departments.
-- 👤 **Patient Service (`patient-service`)**: Manages patient records and medical problems.
-- 🧾 **Receipt Service (`receipt-service`)**: Generates and manages billing receipts.
-- 📦 **Common Library (`common-lib`)**: A shared Maven module containing reusable DTOs, custom exception handling, and security filters to maintain DRY principles.
+-  **API Gateway (`api-gateway`)**: The single entry point for all client requests. Handles dynamic routing and load balancing.
+-  **Discovery Server (`discovery-server`)**: Uses Netflix Eureka for automated service registration and health monitoring.
+-  **Auth Service (`auth-service`)**: Handles user authentication, authorization, and JWT token generation.
+-  **Staff Service (`staff-service`)**: Manages hospital staff details and departments.
+-  **Patient Service (`patient-service`)**: Manages patient records and medical problems.
+-  **Receipt Service (`receipt-service`)**: Generates and manages billing receipts.
+-  **Common Library (`common-lib`)**: A shared Maven module containing reusable DTOs, custom exception handling, and security filters to maintain DRY principles.
 
 ---
 
-## 🛠️ Technologies & Tools
+## Technologies & Tools
 
 =======
-## 📸 Demo
+## Demo
 
 > **Demo Placeholder:** *(Replace this image with a GIF of Postman requests, Swagger UI, or application logs to visually demonstrate the API in action!)*
 
@@ -78,7 +78,7 @@ graph TD
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 This project is built using a **Microservices Architecture**. The monolithic domain has been broken down into independent services communicating through an API Gateway, utilizing a **database-per-service** pattern for true decoupling.
 
@@ -126,19 +126,18 @@ graph TD
 ```
 
 ### Microservices:
-- 🌐 **API Gateway (`api-gateway`)**: The single entry point for all client requests. Handles dynamic routing and load balancing.
-- 🔍 **Discovery Server (`discovery-server`)**: Uses Netflix Eureka for automated service registration and health monitoring.
-- 🔐 **Auth Service (`auth-service`)**: Handles user authentication, authorization, and JWT token generation.
-- 👨‍⚕️ **Staff Service (`staff-service`)**: Manages hospital staff details and departments.
-- 👤 **Patient Service (`patient-service`)**: Manages patient records and medical problems.
-- 🧾 **Receipt Service (`receipt-service`)**: Generates and manages billing receipts.
-- 📦 **Common Library (`common-lib`)**: A shared Maven module containing reusable DTOs, custom exception handling, and security filters to maintain DRY principles.
+-  *API Gateway (`api-gateway`)**: The single entry point for all client requests. Handles dynamic routing and load balancing.
+- **Discovery Server (`discovery-server`)**: Uses Netflix Eureka for automated service registration and health monitoring.
+- **Auth Service (`auth-service`)**: Handles user authentication, authorization, and JWT token generation.
+- **Staff Service (`staff-service`)**: Manages hospital staff details and departments.
+- **Patient Service (`patient-service`)**: Manages patient records and medical problems.
+- **Receipt Service (`receipt-service`)**: Generates and manages billing receipts.
+- **Common Library (`common-lib`)**: A shared Maven module containing reusable DTOs, custom exception handling, and security filters to maintain DRY principles.
 
 ---
 
-## 🛠️ Technologies & Tools
+## Technologies & Tools
 
->>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 | Category | Technology |
 |----------|------------|
 | **Core** | Java 21, Spring Boot 3.2.5 |
@@ -147,27 +146,25 @@ graph TD
 | **Database & ORM** | PostgreSQL, Spring Data JPA, Hibernate |
 <<<<<<< HEAD
 =======
-| **DevOps** | Docker, Docker Compose |
->>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 | **Build & Utilities** | Maven, Lombok |
 
 ---
 
-## 🚀 Features
+## Features
 
-- ✅ **Microservices Infrastructure** — Fully distributed system with Service Discovery and an API Gateway.
+- **Microservices Infrastructure** — Fully distributed system with Service Discovery and an API Gateway.
 <<<<<<< HEAD
-- ✅ **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) running natively on a local PostgreSQL installation to ensure true microservice data decoupling.
+- **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) running natively on a local PostgreSQL installation to ensure true microservice data decoupling.
 =======
-- ✅ **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) managed via Docker Compose.
+- **Database-per-Service** — Isolated PostgreSQL databases (`hos_auth`, `hos_patient`, `hos_staff`, `hos_receipt`) managed via Docker Compose.
 >>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
-- ✅ **JWT Security** — Stateless, secure endpoints with token-based authentication.
-- ✅ **Role-Based Access Control (RBAC)** — Different access levels based on user roles.
-- ✅ **Centralized Exception Handling** — Global exception handlers providing standardized API error responses across all services.
+- **JWT Security** — Stateless, secure endpoints with token-based authentication.
+- **Role-Based Access Control (RBAC)** — Different access levels based on user roles.
+- **Centralized Exception Handling** — Global exception handlers providing standardized API error responses across all services.
 
 ---
 
-## ⚙️ Setup & Installation
+## Setup & Installation
 
 ### Prerequisites
 - Java 21+
@@ -175,8 +172,6 @@ graph TD
 <<<<<<< HEAD
 - PostgreSQL (running locally on default port 5432)
 =======
-- Docker & Docker Compose
->>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
 
 ### 1. Clone the repository
 ```bash
@@ -212,7 +207,7 @@ Start the services in the following order using your IDE or via the command line
 
 ---
 
-## 📌 API Endpoints (Access via API Gateway on port 38021)
+## API Endpoints (Access via API Gateway on port 38021)
 
 =======
 ### 2. Start the Databases
@@ -240,16 +235,16 @@ You must start the services in the following order. You can run them using your 
 
 ---
 
-## 📌 API Endpoints
+## API Endpoints
 
 >>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
-### 🔐 Authentication (`auth-service`)
+### Authentication (`auth-service`)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/user/login` | Authenticate and retrieve JWT token |
 | POST | `/api/user/register` | Register a new user |
 
-### 👤 Patient (`patient-service`)
+### Patient (`patient-service`)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/patients` | Retrieve all patients |
@@ -258,7 +253,7 @@ You must start the services in the following order. You can run them using your 
 | PUT | `/api/patients/{id}` | Update patient details |
 | DELETE | `/api/patients/{id}` | Delete a patient |
 
-### 👨‍⚕️ Staff (`staff-service`)
+### Staff (`staff-service`)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/staff` | Retrieve all staff members |
@@ -266,14 +261,14 @@ You must start the services in the following order. You can run them using your 
 | PUT | `/api/staff/{id}` | Update staff details |
 | DELETE | `/api/staff/{id}` | Delete a staff member |
 
-### 🩺 Problem (`patient-service`)
+### Problem (`patient-service`)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/problems` | Retrieve all medical problems |
 | POST | `/api/problems` | Log a new medical problem |
 | PUT | `/api/problems/{id}` | Update problem status |
 
-### 🧾 Receipt (`receipt-service`)
+### Receipt (`receipt-service`)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/receipts` | Retrieve all billing receipts |
@@ -281,7 +276,7 @@ You must start the services in the following order. You can run them using your 
 
 ---
 
-## 🔐 Authentication
+## Authentication
 
 This API uses **JWT (JSON Web Token)** for authentication.
 1. Authenticate via the `auth-service` through the API Gateway to receive a token.
@@ -292,25 +287,17 @@ This API uses **JWT (JSON Web Token)** for authentication.
 
 ---
 
-## 🧪 Testing
+## Testing
 <<<<<<< HEAD
 The API can be tested manually using a REST client like **Postman**. Ensure you start the API Gateway and pass your generated JWT token as a Bearer token to test secure routes.
 =======
 
-To run unit tests across all microservices (uses H2 in-memory database):
-```bash
-mvn test
-```
->>>>>>> 090312934357c2e1518633fdc301ff0ce28847b5
-
----
-
-## 👤 Author
+## Author
 
 **Abhineet**
 - GitHub: [@AbhineeT-D7](https://github.com/AbhineeT-D7)
 
 ---
 
-## 📄 License
+## License
 This project is open source and available under the [MIT License](LICENSE).
