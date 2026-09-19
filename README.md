@@ -12,6 +12,7 @@ I built this project to challenge myself and dive deep into backend architecture
 ## Architecture  
 
 [Project Architecture](https://via.placeholder.com/800x400.png?text="C:\Users\abhin\Downloads\diagram.png")
+
 ## How it Works
 
 Here is a quick look at how the traffic flows:
@@ -47,6 +48,43 @@ Create 4 empty databases using pgAdmin, DBeaver, or your terminal:
 
 *(Spring Data JPA will automatically create all the necessary tables for you when the apps boot up!)*
 
+## API Endpoints
+
+### Authentication (`auth-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/user/login` | Authenticate and retrieve JWT token |
+| POST | `/api/user/register` | Register a new user |
+
+### Patient (`patient-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/patients` | Retrieve all patients |
+You must start the services in the following order. You can run them using your
+| PUT | `/api/patients/{id}` | Update patient details |
+| DELETE | `/api/patients/{id}` | Delete a patient |
+
+### Staff (`staff-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/staff` | Retrieve all staff members |
+| POST | `/api/staff` | Add a new staff member |
+| PUT | `/api/staff/{id}` | Update staff details |
+| DELETE | `/api/staff/{id}` | Delete a staff member |
+
+### Problem (`patient-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/problems` | Retrieve all medical problems |
+| POST | `/api/problems` | Log a new medical problem |
+| PUT | `/api/problems/{id}` | Update problem status |
+
+### Receipt (`receipt-service`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/receipts` | Retrieve all billing receipts |
+| POST | `/api/receipts` | Generate a new billing receipt |
+
 ### 2. Build the Shared Library
 Because the microservices share DTOs and Security configs, you need to install the common library to your local Maven cache first:
 ```bash
@@ -73,3 +111,11 @@ All requests should go through the API Gateway on `http://localhost:38021`.
 
 ---
 *Feel free to reach out or open an issue if you have any questions about the code or architecture!*
+
+## Author
+
+**Abhineet**
+- GitHub: [@AbhineeT-D7](https://github.com/AbhineeT-D7)
+
+## License
+This project is open source and available under the [MIT License](LICENSE).
