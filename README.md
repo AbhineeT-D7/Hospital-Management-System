@@ -4,12 +4,15 @@ Hey! Welcome to the repository for **MedSecure**.
 
 I built this project to challenge myself and dive deep into backend architecture. It originally started out as a standard Spring Boot monolith, but I recently refactored the entire thing into a full **Microservices Architecture** to get hands-on experience with service discovery, API gateways, and distributed data.
 
-## 🧠 What I Learned Building This
+## What I Learned Building This
 - **Microservices & Spring Cloud:** I broke down the monolithic app into 4 distinct business services. I set up a Netflix Eureka Discovery Server so the services can dynamically find each other, and an API Gateway to act as a single entry point for client requests.
 - **Database-per-Service Pattern:** Instead of one giant database, I configured 4 separate PostgreSQL databases. This prevents the services from tangling their data together and forces true decoupling.
 - **JWT Zero-Trust Security:** I built a custom `common-lib` library that handles JWT token generation and validation. Every microservice imports this library to authenticate incoming requests statelessly. 
 
-## 🏗️ How it Works
+## Architecture  
+
+[Project Architecture](https://via.placeholder.com/800x400.png?text="C:\Users\abhin\Downloads\diagram.png")
+## How it Works
 
 Here is a quick look at how the traffic flows:
 
@@ -30,9 +33,9 @@ graph TD
 
 *Note: All core services automatically register with the Eureka Discovery Server on startup.*
 
-## 🚀 How to Run it Locally
+## How to Run it Locally
 
-If you want to spin this up on your own machine, it's pretty straightforward. You don't need Docker—just Java 21 and PostgreSQL.
+If you want to spin this up on your own machine, it's pretty straightforward. You need only Java 21 and PostgreSQL to run on your machine .
 
 ### 1. Database Setup
 Make sure you have PostgreSQL running locally on the default port `5432` (with username: `postgres`, password: `Admin@0000`). 
@@ -60,8 +63,8 @@ You need to start the apps in this specific order so the gateway and services ca
 5. `receipt-service` (Port 38024)
 6. `staff-service` (Port 38025)
 
-## 🧪 Testing the API
-Since there's no frontend UI yet, I use **Postman** to test the endpoints.
+## Testing the API
+Since there's no frontend UI yet, I did manual testing by using **Postman** to test the API endpoints.
 All requests should go through the API Gateway on `http://localhost:38021`.
 
 1. **Register:** `POST /api/user/register` (Pass a JSON body with name, username, password, and role)
